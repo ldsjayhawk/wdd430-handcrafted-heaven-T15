@@ -1,27 +1,31 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 const links = [
-  { name: 'Home', href: '/' },
-  { name: 'Shop', href: '/shop' },
-  { name: 'Artisans', href: '/artisans' },
+    { name: "Home", href: "/" },
+    { name: "Shop", href: "/shop" },
+    { name: "Artisans", href: "/artisans" },
 ];
 
-export default function NavLinks() {
-
-  return (
-    <>
-      {links.map((link) => {
-        return (
-          <Link
-            key={link.name}
-            href={link.href}
-          >
-            <p>{link.name}</p>
-          </Link>
-        );
-      })}
-    </>
-  );
+export default function NavLinks({
+    onLinkClick,
+}: {
+    onLinkClick?: () => void;
+}) {
+    return (
+        <>
+            {links.map((link) => {
+                return (
+                    <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={onLinkClick}
+                    >
+                        <p>{link.name}</p>
+                    </Link>
+                );
+            })}
+        </>
+    );
 }
