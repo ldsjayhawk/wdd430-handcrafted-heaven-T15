@@ -2,10 +2,12 @@
 
 import Link from 'next/link';
 import NavLinks from '@/app/ui/nav-links';
+import { useSession, signOut } from 'next-auth/react';
 
 
 
 export default function SideNav() {
+  const { data: session } = useSession();
   return (
     <header className="top-nav">
       <div className="left-section">
@@ -18,7 +20,17 @@ export default function SideNav() {
 
       <div className="right-section">
         <span className="icon-placeholder">🛒</span>
-        <Link href="/login" className="icon-placeholder">👤</Link>
+
+          {session ? (
+          <button
+            className="icon-placeholder"
+            onClick={() => signOut()}
+          >
+            🚪
+          </button>
+        ) : (
+          <Link href="/login" className="icon-placeholder">👤</Link>
+        )}
       </div>
     </header>
   );
